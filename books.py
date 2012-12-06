@@ -1,10 +1,10 @@
 from sys import argv
 
-# get and open the file
+#get and open the file
 script, book_list_file = argv
 book_list_file = open(book_list_file)
 
-# assemble a list of text in the file to parse for titles
+#assemble a list of text in the file to parse for titles
 raw_list = [line[:-1] for line in book_list_file if line[0] != '\n' and line[0] != ' ']
 
 find_char       = lambda c,x:   ((c == x) and True) or False
@@ -13,7 +13,7 @@ find_char_index = lambda l,i,x: ((i < 0) and (False, i)) or \
                                 ((find_char(l[i],x) == True) and (True, i)) or \
                                 (find_char_index(l,i-1,x))                               
 
-book_list = [] # empty booklist
+book_list = [] #empty booklist
 def find_title(line):
     global book_list
     end_of_line = len(line) - 1
