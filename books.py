@@ -13,16 +13,18 @@ find_char_index = lambda l,i,x: ((i < 0) and (False, i)) or \
                                 ((find_char(l[i],x) == True) and (True, i)) or \
                                 (find_char_index(l,i-1,x))                               
 
-book_list = [] #empty booklist
 def find_title(line):
-    global book_list
     end_of_line = len(line) - 1
     foo, city_index_2      = find_char_index(line, end_of_line,':')
     bar, city_index_1      = find_char_index(line, city_index_2,'.')
     baz, start_title_index = find_char_index(line, city_index_1-1,'.')
     
-    foo == True and bar == True and baz == True and \
-    book_list.append(line[start_title_index+2:city_index_1])
+    title_found = lambda x, y, z: (x == True and y == True and z == True and True) or False
+    
+    return (title_found(foo,bar,baz),start_title_index+2,city_index_1)
+    
+x         = map(find_title,raw_list)
+book_list = [raw_list[i][x[i][1]:x[i][2]] for i in (range(x)-1) if x[i][0] == True]
 
-map(find_title,raw_list)
 print book_list
+
